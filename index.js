@@ -6,7 +6,7 @@ const Cheerio = require("cheerio");
 const Location = require("./cache/location.json");
 
 const fastify = require("fastify").default({logger: true});
-const PORT = 3000 || process.env.PORT, devMode = false;
+const PORT = process.env.PORT || 3000, devMode = false;
 
 fastify.route({
     method: 'GET', 
