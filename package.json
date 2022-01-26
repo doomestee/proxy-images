@@ -15,5 +15,8 @@
     "cheerio": "^1.0.0-rc.10",
     "fastify": "^3.27.0",
     "undici": "^4.12.2"
+  },
+  "engines": {
+    "node": "17.x.x"
   }
 }
