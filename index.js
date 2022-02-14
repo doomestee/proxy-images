@@ -23,7 +23,7 @@ fastify.route({
 
         if (!req.query['path']) return quick404("Missing path querystring. ");
 
-        if (!['.png'].some(file => req.query['path'].endsWith(file))) return quick404("Recognised file type only: PNG"); //!req.query['path'].endsWith(".png"))
+        if (!['.png'].some(file => req.query['path'].toLowerCase().endsWith(file.toLowerCase()))) return quick404("Recognised file type only: PNG"); //!req.query['path'].endsWith(".png"))
 
         if (['http', '/', 'ws', '.', 'file:', 'file'].some(indicator => req.query['path'].toLowerCase().startsWith(indicator))) return quick404("The path must be the file name, like this for example: 'Nightwraith.png' (excluding the quotation mark)");
 
@@ -61,7 +61,7 @@ fastify.route({
                 Location[path] = link.link;
                 writeFileSync(resolve(__dirname + '/cache/location.json'), JSON.stringify(Location)); // yes this will be problematic if we get like 50 links and a bunch of requests all at once, but I hugely doubt this API will require futureproofing.
 
-                console.log(link);
+                //console.log(link);
                 if (redirect) return reply.redirect(link.link);
 
                 let imgA = await downloadImageFromLink(link.link, resolve(__dirname + '/cache/' + path));
