@@ -87,7 +87,7 @@ fastify.route({
  */
 async function fetchImageLinkFromSource(link) {
     try {
-        const { body, statusCode } = await request("https://epicduelwiki.com/w/File:" + link, {method: "GET", headersTimeout: 1000 * 60 * 5, bodyTimeout: 0});
+        const { body, statusCode } = await request("https://epicduelwiki.com/w/File:" + link, { maxRedirections: 1, method: "GET", headersTimeout: 1000 * 60 * 5, bodyTimeout: 0});
 
         if (statusCode === 404) return {error: "Page doesn't exist."};
 
@@ -112,7 +112,7 @@ async function fetchImageLinkFromSource(link) {
  */
 async function downloadImageFromLink(link, finalPath) {
     try {
-        const { body, statusCode } = await request(link, { headersTimeout: 1000 * 60 * 5, bodyTimeout: 0});
+        const { body, statusCode } = await request(link, { maxRedirections: 1, headersTimeout: 1000 * 60 * 5, bodyTimeout: 0});
 
         if (statusCode === 404) return {error: "Page doesn't exist."};
 
