@@ -4,7 +4,7 @@ const { request } = require("undici");
 const Cheerio = require("cheerio");
 
 const fastify = require("fastify").default({ logger: false});
-const PORT = process.env.PORT || 3000, devMode = true;
+const PORT = process.env.PORT || 3000, devMode = false;
 
 fastify.route({
     method: 'GET', 
