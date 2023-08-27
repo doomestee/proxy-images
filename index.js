@@ -33,12 +33,12 @@ fastify.route({
 
         if (redirect) return reply.redirect(result.link);
 
-
         let image = await fetchImageFromLink(result.link);
 
         if (image.error) return quick404(image.error);
 
-        return reply.send(image.body);
+        if (image.statusCode >= 200 && image.statusCode < 300) return reply.status(200).header("Content-Disposition", 'attachment; filename="npc.png"').send(image.body);
+        else return quick404("Unexpected result was given from the server.");
     }
 });
 
@@ -68,14 +68,14 @@ async function fetchImageLinkFromSource(path) {
 /**
  * Fetches the raw image
  * @param {string} link (full link)
- * @returns {Promise<{success: true, body: any}|{error: "Page doesn't exist."}>}
+ * @returns {Promise<{success: true, body: any, statusCode: number}|{error: "Page doesn't exist."}>}
  */
 async function fetchImageFromLink(link) {
     const { body, statusCode } = await request(link, { headersTimeout: 1000 * 60 * 5, bodyTimeout: 0});
 
     if (statusCode === 404) return {error: "Page doesn't exist."};
 
-    return { success: true, body };
+    return { success: true, body, statusCode };
 }
 
 fastify.setErrorHandler((error, req, res) => {
