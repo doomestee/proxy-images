@@ -1,22 +1,19 @@
 {
   "name": "image-proxy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Made to yank images right out of ED's wiki",
   "main": "index.js",
   "scripts": {
     "start": "node index"
   },
   "keywords": [
-    "Proxy"
+    "Proxy", "EpicDuel"
   ],
   "author": "Doomester",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.10",
-    "fastify": "^3.27.0",
-    "undici": "^4.12.2"
-  },
-  "engines": {
-    "node": "17.x.x"
+    "cheerio": "^1.0.0-rc.12",
+    "fastify": "^4.22.0",
+    "undici": "^5.23.0"
   }
 }
